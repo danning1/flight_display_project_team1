@@ -1,11 +1,25 @@
-NEXT.JS Framework
-Prisma ORM
-# UI
-MUI MIT-licensed
+# Next.js Command-Line
+```
+Dev Mode: npm run dev
+Build: npm run build
+Run Build version: npm run start
+```
 
-```bash
-npm run dev
-yarn dev
+# Prisma Command-Line
+```
+Init: npx prisma init
+Generate: npx prisma generate
+```
+
+# Frameworks
+```
+Web Framework:  Next.js
+ORM:            Prisma
+```
+
+# packages
+```
+UI: MUI MIT-licensed
 ```
 
 # icons
