@@ -1,0 +1,24 @@
+.side_div{
+  background-color: gray;
+  height: 100vh;
+  width: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+.side_bar{
+  background-color: red;
+  height:calc(100% - 80px);
+  width: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+.side_bar_s{
+  float: left;
+  background-color: gray;
+  height: 100%;
+  width: 30px;
+  display: flex;
+  flex-direction: column;
+}

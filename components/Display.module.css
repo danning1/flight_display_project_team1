@@ -1,0 +1,33 @@
+.display_window{
+    background-color: aqua;
+    height: 100%;
+    width: 100%;
+    display: inline-flex;
+    flex-direction: column;
+}
+  
+.nav_bar{
+  display: flex;
+  color: white;
+  font-size: large;
+  background-color: blue;
+  align-items: center;
+  height: 40px;
+}
+.categoty_name{
+  width: 100%;
+  text-align: center;
+}
+.inner_window{
+  background-color: white;
+  height:calc(100% - 40px);
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: flex-start;
+}
+
+.item{
+  margin: 2px;
+  height: 120px;
+}
