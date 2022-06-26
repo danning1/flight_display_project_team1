@@ -1,15 +1,12 @@
 .main_window{
-  background-color: black;
-  height: 100%;
-  width: 100%;
-}
-
-.body_window{
-  height: 100%;
-  width: 100%;
-  background: aquamarine;
-  display: inline-flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
-}
-
+    height: 100%;
+    width: 100%;
+    background: aquamarine;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .main_window > div{
+    width: 100%;
+  }
+  
