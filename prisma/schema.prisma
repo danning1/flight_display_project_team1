@@ -10,13 +10,34 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model FlightInfomation{
-  id String @id
-  flightgNumber Int
-  flightModel String
-  departureTime DateTime
-  departureFrom String
-  expectingArrivingTime DateTime
-  expectingArriveAt String
-  totalRange Float
+model category{
+  name String @unique
+}
+
+model movie{
+  name String @unique
+  desc String
+  type Int
+  length String
+}
+
+model menu{
+  name String @unique
+  desc String
+  type Int
+  price Float
+}
+
+model shoppingCart{
+  id Int @id() @default(autoincrement())
+  name String
+  price Float
+  count Int
+}
+
+model user{
+  id Int @id @default(autoincrement())
+  name String
+  password String
+  balance Float
 }

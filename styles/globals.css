@@ -3,6 +3,7 @@ html, body, #__next{
     height: 100%;
     min-width: 320px;
 }
-div{
+body{
+    background-color: gray;
     margin: 0;
 }

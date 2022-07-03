@@ -1,11 +1,17 @@
-import { Box } from '@mui/system'
-import styles from './ItemList.module.css'
+import { Card } from "@mui/material";
+import React from "react";
 
-export default function ItemList({items}){
-    
+export default function ItemList(){
+
     return(
-        <Box className={`${styles.main_container}`} sx={{
-            flex:1}}>
-        </Box>
+        <React.Fragment>
+        
+            <Card sx={{
+                height:"200px",
+                width:"300px",
+                margin:"10px",
+            }}>Name</Card>
+
+        </React.Fragment>
     )
 }
