@@ -1,5 +1,5 @@
 import prisma from "../../../components/prismaClient.js"
 export default async function handler(req, res) {
-    const find_all = await prisma.food.findMany();
+    const find_all = await prisma.menuType.findMany();
     res.json(find_all);
 }

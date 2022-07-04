@@ -2,9 +2,10 @@ import { Card, Box, Typography, CardActionArea } from "@mui/material";
 import React, { useState, useEffect } from "react";
 
 export default function CardListWithType({data,data_type}){
+    console.log(data_type)
     const data_map = Object.keys(data).map(type=>
             <React.Fragment key={type}>
-                <Typography variant="h4" sx={{width:'100%',height:'50px'}}>{data_type[type-1].name}:</Typography>
+                <Typography variant="h4" sx={{width:'100%',height:'50px'}}>{data_type[type].name}:</Typography>
                 {data[type].map(
                     el=>
                             <React.Fragment key={el.name}>
