@@ -1,9 +1,8 @@
-import { PictureAsPdfRounded } from "@mui/icons-material";
 import { Box } from "@mui/material";
 import React from "react";
-import ItemList from "../components/ItemList";
+import CategoryList from "../components/CategoryList";
 
-export default function Home(){
+export default function Home(props){
   return(
     <React.Fragment>
         <Box sx={{
@@ -14,7 +13,7 @@ export default function Home(){
         }}>
           {/* navbar */}
           <Box sx={{
-            height:"50px",
+            height:"60px",
             backgroundColor:"gray",
           }}>
 
@@ -33,9 +32,17 @@ export default function Home(){
             display:"flex",
             flexDirection:"row",
           }}>
-            <ItemList></ItemList>
+            <CategoryList categories={props.categories}></CategoryList>
           </Box>
         </Box>
     </React.Fragment>
   )
+}
+
+export async function getStaticProps(){
+  const res = await fetch(`${process.env.HOST}/api/categories/read`)
+  const categories = await res.json()
+  return{
+    props:{categories:categories},
+  }
 }

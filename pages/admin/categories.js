@@ -70,7 +70,6 @@ function CategoryAdmin(props){
                         setLoading(false)
                 })
         },[reloading]
-
     )
 
     if (isLoading) return <p>Loading...</p>

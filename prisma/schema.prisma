@@ -9,7 +9,7 @@ datasource db {
   provider = "sqlite"
   url      = env("DATABASE_URL")
 }
-
+// not change
 model category{
   name String @unique
 }
@@ -20,14 +20,29 @@ model movie{
   type Int
   length String
 }
-
+model movieType{
+  id Int @id
+  name String
+}
+model game{
+  name String @unique
+  desc String
+  type Int
+}
+model gameType{
+  id Int @id
+  name String
+}
 model menu{
   name String @unique
   desc String
   type Int
   price Float
 }
-
+model menuType{
+  id Int @id
+  name String
+}
 model shoppingCart{
   id Int @id() @default(autoincrement())
   name String
