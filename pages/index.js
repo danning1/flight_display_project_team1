@@ -1,8 +1,9 @@
 import { Box } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import CategoryList from "../components/CategoryList";
 
 export default function Home(props){
+  
   return(
     <React.Fragment>
         <Box sx={{
@@ -39,7 +40,7 @@ export default function Home(props){
   )
 }
 
-export async function getStaticProps(){
+export async function getStaticProps(context){
   const res = await fetch(`${process.env.HOST}/api/categories/read`)
   const categories = await res.json()
   return{

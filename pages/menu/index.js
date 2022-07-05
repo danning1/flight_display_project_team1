@@ -26,7 +26,7 @@ export default function MenuHome(props){
             display:"flex",
             flexDirection:"row",
           }}>
-            <CardListWithType data={props.menu} data_type={props.menuType}></CardListWithType>
+            <CardListWithType data={props.menu} data_type={props.menuType} currentTab="menu"></CardListWithType>
           </Box>
         </Box>
     </React.Fragment>

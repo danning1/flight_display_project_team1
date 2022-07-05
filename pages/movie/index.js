@@ -26,7 +26,7 @@ export default function MovieHome(props){
             display:"flex",
             flexDirection:"row",
           }}>
-            <CardListWithType data={props.movie} data_type={props.movieType}></CardListWithType>
+            <CardListWithType data={props.movie} data_type={props.movieType} currentTab="movie"></CardListWithType>
           </Box>
         </Box>
     </React.Fragment>

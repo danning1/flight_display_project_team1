@@ -50,7 +50,7 @@ model menuType{
 
 model shoppingCart{
   id Int @id() @default(autoincrement())
-  name String
+  name String @unique
   price Float
   count Int
 }
@@ -64,4 +64,8 @@ model user{
   name String
   password String
   balance Float
+}
+model callAttendant{
+  userId Int @id
+  isCall Boolean
 }
