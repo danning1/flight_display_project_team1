@@ -1,13 +1,54 @@
-import React, { useState } from "react";
-import { Box, TableBody, TableCell, TableContainer, TableHead, TableRow, Table, IconButton } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import { Box, TableBody, TableCell, TableContainer, TableHead, TableRow, Table, IconButton, Button } from "@mui/material";
 import Paper from "@mui/material";
 import ArrowLeftIcon from '@mui/icons-material/ArrowLeft'
 import ArrowRightIcon from '@mui/icons-material/ArrowRight'
 import { useRouter } from "next/router";
 
 export default function CartHome(props){
-    const [data,setData] = useState(props.cart);
+    const [changeCount,setChangeCount] = useState(0);
+    const [shoppingCart,setShoppingCart] = useState(null);
+    const [onload,setOnload] = useState(false);
     const router = useRouter()
+
+    useEffect(()=>{
+      let data = localStorage.getItem('shoppingCartDB');
+      if(!data) 
+      data = {}
+      else
+      data = JSON.parse(data)
+      setShoppingCart(data)
+      setOnload(true);
+    },[])
+
+    function onClickHandeler(name,f){
+      let data = shoppingCart
+      console.log(name,f)
+      if (f==1){
+        console.log(data)
+        data[name].count += 1;
+        console.log(data)
+      }else{
+        if(data[name].count<=1){
+          delete data[name];
+        }else{
+          data[name].count -= 1;
+        }
+      }
+
+      setShoppingCart(data)
+      setChangeCount(changeCount+1)
+    }
+
+    useEffect(
+      ()=>{
+        if(onload){
+          const jsonObject = JSON.stringify(shoppingCart);
+          localStorage.setItem('shoppingCartDB',jsonObject);
+        }
+      },[changeCount]
+    )
+
     return(
         <React.Fragment>
         <Box sx={{
@@ -29,7 +70,7 @@ export default function CartHome(props){
             flex:1,
             backgroundColor:"white",
             display:"flex",
-            flexDirection:"row",
+            flexDirection:'column',
           }}>
             <TableContainer component={Paper}>
                 <Table sx={{minWidth:650}}>
@@ -42,22 +83,22 @@ export default function CartHome(props){
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {data.map((el)=>
-                            <TableRow key={el.id}>
-                                <TableCell>{el.name}</TableCell>
-                                <TableCell>{el.price}</TableCell>
+                        {(!shoppingCart)?<React.Fragment></React.Fragment>:Object.keys(shoppingCart).map((name)=>
+                            <TableRow key={shoppingCart[name].name}>
+                                <TableCell>{shoppingCart[name].name}</TableCell>
+                                <TableCell>{shoppingCart[name].price}$</TableCell>
                                 <TableCell>
-                                <IconButton><ArrowLeftIcon></ArrowLeftIcon></IconButton>
-                                {el.count}
-                                <IconButton><ArrowRightIcon></ArrowRightIcon></IconButton>
+                                <IconButton onClick={e=>{onClickHandeler(name,0)}}><ArrowLeftIcon></ArrowLeftIcon></IconButton>
+                                {shoppingCart[name].count}
+                                <IconButton onClick={e=>{onClickHandeler(name,1)}}><ArrowRightIcon></ArrowRightIcon></IconButton>
                                 </TableCell>
-                                <TableCell>{(el.price*el.count).toFixed(2)}</TableCell>
+                                <TableCell>{(shoppingCart[name].price*shoppingCart[name].count).toFixed(2)}$</TableCell>
                             </TableRow>)
                         }
                     </TableBody>
                 </Table>
             </TableContainer>
-
+              <Button variant='contained' sx={{backgroundColor:'green'}}>Pay</Button>
           </Box>
         </Box>
     </React.Fragment>

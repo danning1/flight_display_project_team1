@@ -5,6 +5,7 @@ export default function CardListWithType({data,data_type,currentTab}){
     const router = useRouter()
     const [isFetching,setIsFetching] = useState(false);
     const [item,setItem] = useState(null);
+
     function onclickHandeler(el){
         setItem(el);
         if(currentTab=='movie'){
@@ -14,18 +15,34 @@ export default function CardListWithType({data,data_type,currentTab}){
         }
     }
 
-
     useEffect(()=>{
         if(isFetching){
             setIsFetching(false);
-            fetch(`/api/shoppingCart/create`,{
-                method : "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({name:item.name,price:item.price})
-                })
+            let data = localStorage.getItem('shoppingCartDB');
+            if(!data || typeof(data) == 'undefined' || data == 'null'){
+                data = {};
+            }else{
+                data = JSON.parse(data);
+            }
+
+            if (Object.keys(data).includes(item.name)){
+                data[item.name].count += 1;
+            }else{
+                data[item.name] = {name:item.name,price:item.price,count:1}
+            }
+            const jsonObject = JSON.stringify(data)
+            console.log(data)
+            localStorage.setItem('shoppingCartDB',jsonObject)
+
+
+            // fetch(`/api/shoppingCart/create`,{
+            //     method : "POST",
+            //     headers: { "Content-Type": "application/json" },
+            //     body: JSON.stringify({name:item.name,price:item.price})
+            //     })
         }
     },[isFetching])
-
+    
     const data_map = Object.keys(data).map(type=>
             <React.Fragment key={type}>
                 <Typography variant="h4" sx={{width:'100%',height:'50px'}}>{data_type[type].name}:</Typography>
@@ -51,7 +68,7 @@ export default function CardListWithType({data,data_type,currentTab}){
             </React.Fragment>
         )
     return(
-        <Box sx={{display:"flex",flexDirection:"row",width:"100%",flexWrap:"wrap"}}>
+        <Box sx={{display:"flex",flexDirection:"row",width:"100%",flexWrap:"wrap",alignContent:'flex-start'}}>
                 {data_map}
         </Box>
     )
