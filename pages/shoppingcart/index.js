@@ -4,12 +4,35 @@ import Paper from "@mui/material";
 import ArrowLeftIcon from '@mui/icons-material/ArrowLeft'
 import ArrowRightIcon from '@mui/icons-material/ArrowRight'
 import { useRouter } from "next/router";
+import NavBar from "../../components/NavBar";
 
 export default function CartHome(props){
+    const router = useRouter()
     const [changeCount,setChangeCount] = useState(0);
     const [shoppingCart,setShoppingCart] = useState(null);
     const [onload,setOnload] = useState(false);
-    const router = useRouter()
+    const [totalPrice,setTotalPrice] = useState(0); 
+    const [user,setUser] = useState(null);
+    const [isLogin,setIsLogin] = useState(false);
+
+    // user init
+    useEffect(()=>{
+      let data = localStorage.getItem('userDB');
+
+      if(!data) {
+          setIsLogin(false)
+      }
+      else{
+        data = JSON.parse(data);
+        fetch(`/api/user/${data.id}`)
+        .then(res=>res.json())
+        .then((d)=>{
+          setUser(d);
+          localStorage.setItem('userDB',JSON.stringify(d))
+          setIsLogin(true);
+        })
+      }
+    },[]);
 
     useEffect(()=>{
       let data = localStorage.getItem('shoppingCartDB');
@@ -17,6 +40,11 @@ export default function CartHome(props){
       data = {}
       else
       data = JSON.parse(data)
+      let t_price = 0.0;
+      Object.keys(data).map((name)=>{
+        t_price+=data[name].price*data[name].count;
+      })
+      setTotalPrice(t_price)
       setShoppingCart(data)
       setOnload(true);
     },[])
@@ -27,17 +55,41 @@ export default function CartHome(props){
       if (f==1){
         console.log(data)
         data[name].count += 1;
-        console.log(data)
-      }else{
+      }else if(f==0){
         if(data[name].count<=1){
           delete data[name];
         }else{
           data[name].count -= 1;
         }
       }
-
+      let t_price = 0.0;
+      Object.keys(data).map((name)=>{
+        t_price+=data[name].price*data[name].count;
+      })
+      setTotalPrice(t_price)
       setShoppingCart(data)
       setChangeCount(changeCount+1)
+    }
+
+    async function paymentHandeler(f){
+      if(f==0){
+        let data = localStorage.getItem('userDB');
+        if(!data) {
+          alert("plz log in first");
+          data = {}
+        }else{
+          data = JSON.parse(data)
+          const res = await fetch(`api/user/${data.id}/${totalPrice}`)
+          if(res.status==200){
+            localStorage.removeItem('shoppingCartDB');
+          }else{
+            alert(res.statusText)
+          }
+        }
+      }else if (f==1){
+        localStorage.removeItem('shoppingCartDB');
+        router.push(`/creditCard`)
+      }
     }
 
     useEffect(
@@ -59,20 +111,17 @@ export default function CartHome(props){
         }}>
 
           {/* navbar */}
-          <Box sx={{
-            height:"60px",
-            backgroundColor:"gray",
-          }}>
-          </Box>
+          <NavBar user={user} isLogin={isLogin}></NavBar>
 
           {/*Body*/}
           <Box sx={{
             flex:1,
             backgroundColor:"white",
             display:"flex",
-            flexDirection:'column',
+            flexDirection:'row',
+            flexWrap:'wrap'
           }}>
-            <TableContainer component={Paper}>
+            <TableContainer component={Paper} sx={{flex:'auto'}}>
                 <Table sx={{minWidth:650}}>
                     <TableHead>
                         <TableRow>
@@ -98,7 +147,8 @@ export default function CartHome(props){
                     </TableBody>
                 </Table>
             </TableContainer>
-              <Button variant='contained' sx={{backgroundColor:'green'}}>Pay</Button>
+              <Button onClick={e=>{paymentHandeler(1)}} variant='contained' sx={{backgroundColor:'green',flex:1/2,margin:'2px',height:'50px'}}>Pay with Credit Card ({totalPrice}$)</Button>
+              <Button onClick={e=>{paymentHandeler(0)}} variant='contained' sx={{backgroundColor:'green',flex:1/2,margin:'2px',height:'50px'}}>Pay with Point ({totalPrice}$)</Button>
           </Box>
         </Box>
     </React.Fragment>

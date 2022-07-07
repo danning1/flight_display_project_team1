@@ -1,8 +1,29 @@
 import { Box } from "@mui/material";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import CategoryList from "../components/CategoryList";
+import NavBar from "../components/NavBar";
 
 export default function Home(props){
+  const [user,setUser] = useState(null);
+  const [isLogin,setIsLogin] = useState(false);
+
+  useEffect(()=>{
+    let data = localStorage.getItem('userDB');
+
+    if(!data) {
+        setIsLogin(false)
+    }
+    else{
+      data = JSON.parse(data);
+      fetch(`/api/user/${data.id}`)
+      .then(res=>res.json())
+      .then((d)=>{
+        setUser(d);
+        localStorage.setItem('userDB',JSON.stringify(d))
+        setIsLogin(true);
+      })
+    }
+  },[])
   
   return(
     <React.Fragment>
@@ -13,12 +34,8 @@ export default function Home(props){
           flexDirection:"column",
         }}>
           {/* navbar */}
-          <Box sx={{
-            height:"60px",
-            backgroundColor:"gray",
-          }}>
+          <NavBar user={user} isLogin={isLogin}></NavBar>
 
-          </Box>
           {/*head*/}
           <Box sx={{
             flex:0.4,

@@ -52,7 +52,7 @@ export default function CardListWithType({data,data_type,currentTab}){
                                 <Card  sx={{flex:1/4,margin:"10px",height:'200px',minWidth:"300px",display:'flex',flexDirection:'column'}}>
                                     <CardActionArea sx={{flex:4/5,display:'flex',flexDirection:'column'}} onClick={e=>{onclickHandeler(el)}}>
                                         <Typography  variant="h4" sx={{borderBottom:1,flex:1/4,width:'100%'}}>{el.name}</Typography>
-                                        <Typography variant='body1' sx={{flex:3/4,alignSelf:'start'}}>&emsp;{el.desc}</Typography>
+                                        <Typography variant='body1' sx={{flex:3/4,alignself:'start'}}>&emsp;{el.desc}</Typography>
                                     </CardActionArea>
                                     <Box sx={{flex:1/5,display:'flex',flexDirection:'row-reverse',backgroundColor:'rgb(161, 175, 188)'}}>
                                         {(el.price)

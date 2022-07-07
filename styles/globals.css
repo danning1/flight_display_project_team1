@@ -4,6 +4,5 @@ html, body, #__next{
     min-width: 320px;
 }
 body{
-    background-color: gray;
     margin: 0;
 }

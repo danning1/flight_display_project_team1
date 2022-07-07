@@ -61,7 +61,7 @@ model shoppingHistory{
 }
 model user{
   id Int @id @default(autoincrement())
-  name String
+  name String @unique
   password String
   balance Float
 }
