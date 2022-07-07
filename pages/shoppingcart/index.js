@@ -94,12 +94,18 @@ export default function CartHome(props){
           }
         }
       }else if (f==1){
-        const ct = await fetch(`api/shoppingHistory/create`,{
-          method : "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({data:shoppingCart,userId:user.id})
-        })
-        .then(localStorage.removeItem('shoppingCartDB'))
+        if (!user.id){
+          alert("plz log in first");
+        }else{
+          const ct = await fetch(`api/shoppingHistory/create`,{
+            method : "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({data:shoppingCart,userId:user.id})
+          })
+          .then(localStorage.removeItem('shoppingCartDB'))
+          .then(router.reload(window.location.pathname))
+        }
+        
         // router.push(`/creditCard`)
       }
     }
