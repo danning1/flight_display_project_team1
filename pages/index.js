@@ -48,10 +48,10 @@ export default function Home(props){
               flex:1,
               backgroundColor:'white',
             }}>
-              <Typography align='center' variant='h2'>Welcome to xxx AirLine</Typography>
-              <Typography align='center' variant='h4'>Flight Model: 737 Max</Typography>
-              <Typography align='center' variant='h4'>From: somewhere</Typography>
-              <Typography align='center' variant='h4'>To: nowhere</Typography>
+              <Typography align='center' variant='h2'>Welcome to team1 AirLine</Typography>
+              <Typography align='center' variant='h4'>Aircraft Model: 737 Max</Typography>
+              <Typography align='center' variant='h4'>From: 2401 Ronald Reagan Washington National Airport, VA</Typography>
+              <Typography align='center' variant='h4'>To: Van Wyck and JFK Expressway, NY </Typography>
               <Typography align='center' variant='h4'>Estimate Time: 7/8/2023 6:00 AM EST</Typography>
             </Box>
           </Box>
