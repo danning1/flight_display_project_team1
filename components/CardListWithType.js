@@ -32,6 +32,7 @@ export default function CardListWithType({data,data_type,currentTab}){
             }
             const jsonObject = JSON.stringify(data)
             localStorage.setItem('shoppingCartDB',jsonObject)
+            router.reload(window.location.pathname)
 
 
             // fetch(`/api/shoppingCart/create`,{

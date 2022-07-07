@@ -144,7 +144,7 @@ export default function GameHome(props){
             <section className={styles.frames}>
                 <section className={styles.container}>
                     <section className={styles.ImageContainer}>
-                      <Image src={millionare} alt="millionare" width={200} height={150} />
+                      <Image src={millionare} alt="millionare" width={600} height={400} />
                     </section>
                     <section className={styles.firstHalf}>
 
@@ -157,9 +157,13 @@ export default function GameHome(props){
                         </h1>
                         
                         <p className={styles.gameDesc}>
-                        contestants tackle a series of multiple-choice 
-                        questions to win large cash prizes in a format 
-                        that twists on many game show genre conventions
+                        Who Wants to Be a Millionaire? is a quiz competition where 
+                        contestants have to correctly answer a series of multiple-choice 
+                        questions in order to advance to the next level / question. 
+                        There are 15 questions in total and each question is worth a specific 
+                        amount of money and no time limit is placed on contestants to come up 
+                        with an answer. Contestants also get three Lifelines to assist them 
+                        if they get stuck on a particular question..
                         </p>
                         
                     </section>

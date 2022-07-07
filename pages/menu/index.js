@@ -4,7 +4,6 @@ import { Box } from "@mui/material";
 import NavBar from "../../components/NavBar";
 
 export default function MenuHome(props){
-
     // nav bar variabel
     const [user,setUser] = useState(null);
     const [isLogin,setIsLogin] = useState(false);

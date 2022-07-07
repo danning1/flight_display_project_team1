@@ -34,15 +34,15 @@ export default function NavBar({user, isLogin}){
 
     useEffect(
         ()=>{
-            document.addEventListener('storage',()=>{
+            window.addEventListener('storage',()=>{
                 console.log('storage event')
                 setBadge(0);
             })
         
             return ()=>{
-                document.removeEventListener('storage',()=>{});
+              window.removeEventListener('storage',()=>{});
             }
-        },[]
+        }
     )
 
     //Osman start
@@ -55,7 +55,7 @@ export default function NavBar({user, isLogin}){
     const [audioFlight, setAudioFlight] = useState(null)
     useEffect(() => {
         const audioVar = new Audio('/emergencyCall.mp3')
-        const audioFlightVar = new Audio('/phoneCall.mp3')
+        const audioFlightVar = new Audio('/call.mp3')
         setAudio(audioVar)
         setAudioFlight(audioFlightVar)
         let loyaltyData = localStorage.getItem('loyaltyData')
