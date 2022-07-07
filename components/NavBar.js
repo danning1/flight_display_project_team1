@@ -58,6 +58,7 @@ export default function NavBar({user, isLogin}){
     
     return(
         <Box sx={{
+            width:'100%',
             borderStyle:'solid',
             display:'flex',
             flexWrap:'nowrap',

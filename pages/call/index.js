@@ -7,6 +7,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import styles from "./style.module.css";
+import NavBar from '../../components/NavBar';
 
 const style = {
     position: 'absolute',
@@ -38,6 +39,28 @@ export default function BasicModal() {
     const [playApp, setPlayApp] = useState(false)
     const [buttonApp, setButtonApp] = useState(false)
     const [audioApp, setAudioApp] = useState(null)
+
+
+    // nav bar variabel
+    const [user,setUser] = useState(null);
+    const [isLogin,setIsLogin] = useState(false);
+    useEffect(()=>{
+        let data = localStorage.getItem('userDB');
+
+        if(!data) {
+            setIsLogin(false)
+        }
+        else{
+        data = JSON.parse(data);
+        fetch(`/api/user/${data.id}`)
+        .then(res=>res.json())
+        .then((d)=>{
+            setUser(d);
+            localStorage.setItem('userDB',JSON.stringify(d))
+            setIsLogin(true);
+        })
+        }
+    },[]);
 
 
 
@@ -86,7 +109,7 @@ export default function BasicModal() {
 
     return (
         <div className={styles.main}>
-
+            <NavBar user={user} isLogin={isLogin}></NavBar>
             <div className={styles.mainDiv}>
                 <h1 className={styles.heading}>Make phone call</h1>
 
