@@ -1,0 +1,301 @@
+.main {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgb(47, 46, 46);
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.heading {
+  font-size: 5.5rem;
+  font-weight: bold;
+  color: #00bcd4;
+}
+.subMain {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.btnCall {
+  font-size: 100px;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  font-family: inherit;
+  font-weight: 500;
+  font-size: 17px;
+  padding: 0.8em 1.3em 0.8em 0.9em;
+  color: white;
+  background: #ad5389;
+  background: linear-gradient(to right, #0f0c29, #302b63, #24243e);
+  border: none;
+  letter-spacing: 0.05em;
+  border-radius: 5px;
+}
+.endCallBtn {
+  display: flex;
+  align-items: center;
+  font-family: inherit;
+  font-weight: 500;
+  font-size: 17px;
+  padding: 0.8em 1.3em 0.8em 0.9em;
+  color: white;
+  background: #ad5389;
+  background: linear-gradient(to right, #ff0000, #963737, #472020);
+  border: none;
+  letter-spacing: 0.05em;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+.icon {
+  margin-right: 3px;
+  transition: transform 0.5s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.buttonText {
+  transition: transform 0.5s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.button:hover .icon {
+  transform: translateX(5px) rotate(45deg);
+}
+
+.button:hover .buttonText {
+  transform: translateX(7px);
+}
+.endCallBtn:hover .icon {
+  transform: translateX(5px) scale(1.5);
+}
+
+.endCallBtn:hover .buttonText {
+  transform: translateX(7px);
+}
+.loading {
+  --speed-of-animation: 0.9s;
+  --gap: 6px;
+  --first-color: #4c86f9;
+  --second-color: #49a84c;
+  --third-color: #f6bb02;
+  --fourth-color: #f6bb02;
+  --fifth-color: #2196f3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  gap: 6px;
+  height: 100px;
+}
+
+.loading span {
+  width: 4px;
+  height: 50px;
+  background: var(--first-color);
+  animation: scale var(--speed-of-animation) ease-in-out infinite;
+}
+
+.loading span:nth-child(2) {
+  background: var(--second-color);
+  animation-delay: -0.8s;
+}
+
+.loading span:nth-child(3) {
+  background: var(--third-color);
+  animation-delay: -0.7s;
+}
+
+.loading span:nth-child(4) {
+  background: var(--fourth-color);
+  animation-delay: -0.6s;
+}
+
+.loading span:nth-child(5) {
+  background: var(--fifth-color);
+  animation-delay: -0.5s;
+}
+
+.noselect {
+  width: 150px;
+  height: 50px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  background: red;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.15);
+  background: #e62222;
+}
+
+.noselect .noselecttext {
+  transition: 200ms;
+}
+
+.noselect .noselecttext {
+  transform: translateX(35px);
+  color: white;
+  font-weight: bold;
+}
+
+.noselect .noselecticon {
+  position: absolute;
+  border-left: 1px solid #c41b1b;
+  transform: translateX(110px);
+  height: 40px;
+  width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.noselect svg {
+  width: 15px;
+  fill: #eee;
+}
+
+.noselect:hover {
+  background: #ff3636;
+}
+
+.noselect:hover .noselecttext {
+  color: transparent;
+}
+
+.noselect:hover .noselecticon {
+  width: 150px;
+  border-left: none;
+  transform: translateX(0);
+}
+
+.noselect:focus {
+  outline: none;
+}
+
+.noselect:active .noselecticon svg {
+  transform: scale(0.8);
+}
+
+.mainDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(47, 46, 46);
+  height: 100vh;
+  flex-direction: column;
+}
+.cardButton {
+  background-color: rgb(0, 23, 67);
+  border-radius: 10px;
+  padding: 10px;
+  margin: 10px;
+  font-size: 20px;
+  font-weight: bold;
+
+  cursor: pointer;
+}
+.balance {
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.inputGroup {
+  display: flex;
+  align-items: center;
+}
+
+.numberInput {
+  min-height: 50px;
+  max-width: 150px;
+  padding: 0 1rem;
+  color: #fff;
+  font-size: 15px;
+  border: 1px solid #5e4dcd;
+  border-radius: 6px 0 0 6px;
+  background-color: transparent;
+}
+
+.buttonCall {
+  min-height: 50px;
+  padding: 0.5em 1em;
+  border: none;
+  border-radius: 0 6px 6px 0;
+  background-color: #5e4dcd;
+  color: #fff;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+.buttonCallLoyalty {
+  min-height: 50px;
+  padding: 0.5em 1em;
+  border: none;
+  border-radius: 0 6px 6px 0;
+  background-color: #5e4dcd;
+  color: #fff;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+  display: block;
+  margin-left: 10px;
+}
+
+.buttonCall:hover {
+  background-color: #5e5dcd;
+}
+
+.numberInput:focus,
+.numberInput:focus-visible {
+  border-color: #3898ec;
+  outline: none;
+}
+
+.cardNumberInput {
+  width: 100%;
+  height: 30px;
+  border: 1px solid #5e4dcd;
+  border-radius: 30px;
+  text-indent: 5px;
+}
+.dateInput {
+  margin: 5px 5px 0 0;
+  height: 30px;
+  border: 1px solid #5e4dcd;
+  border-radius: 30px;
+  text-indent: 5px;
+}
+.cvInput {
+  margin: 5px 5px 0 0;
+  height: 30px;
+  border: 1px solid #5e4dcd;
+  border-radius: 30px;
+  text-indent: 5px;
+}
+
+.submitButton {
+  display: block;
+}
+
+.inputGroupText {
+  font-size: 20px;
+  font-weight: bold;
+  color: rgb(248, 152, 152);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+@keyframes scale {
+  0%,
+  40%,
+  100% {
+    transform: scaleY(0.05);
+  }
+
+  20% {
+    transform: scaleY(1);
+  }
+}

@@ -1,26 +1,25 @@
-# Next.js Command-Line
+# Befor start
 ```
-Dev Mode: npm run dev
+npm install
+npx prisma generate
+```
+# Next.js build
+```
 Build: npm run build
 Run Build version: npm run start
 ```
-
-# Prisma Command-Line
+# Next.js devlopment
 ```
-Init: npx prisma init
-Generate: npx prisma generate
+Dev Mode: npm run dev
 ```
-
 # Frameworks
 ```
 Web Framework:  Next.js
 ORM:            Prisma
 ```
-
 # packages
 ```
 UI: MUI MIT-licensed
 ```
-
 # icons
 https://mui.com/material-ui/material-icons/
