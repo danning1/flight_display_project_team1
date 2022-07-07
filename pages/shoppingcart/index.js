@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Box, TableBody, TableCell, TableContainer, TableHead, TableRow, Table, IconButton, Button } from "@mui/material";
-import Paper from "@mui/material";
 import ArrowLeftIcon from '@mui/icons-material/ArrowLeft'
 import ArrowRightIcon from '@mui/icons-material/ArrowRight'
 import { useRouter } from "next/router";
@@ -135,7 +134,7 @@ export default function CartHome(props){
             flexDirection:'row',
             flexWrap:'wrap'
           }}>
-            <TableContainer component={Paper} sx={{flex:'auto'}}>
+            <TableContainer component='Paper' sx={{flex:'auto'}}>
                 <Table sx={{minWidth:650}}>
                     <TableHead>
                         <TableRow>
@@ -169,7 +168,7 @@ export default function CartHome(props){
     )
 }
 
-export async function getStaticProps(){
+export async function getServerSideProps(){
   const res = await fetch(`${process.env.HOST}/api/shoppingCart/read`)
   const cart = await res.json();
   return{

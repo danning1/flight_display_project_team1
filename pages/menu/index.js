@@ -52,7 +52,7 @@ export default function MenuHome(props){
     )
 }
 
-export async function getStaticProps(){
+export async function getServerSideProps(){
   const res0 = await fetch(`${process.env.HOST}/api/menu/read`)
   const res1 = await fetch(`${process.env.HOST}/api/menu/readType`)
   const menu = await res0.json()

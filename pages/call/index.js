@@ -61,6 +61,7 @@ export default function BasicModal() {
         })
         }
     },[]);
+    // nav bar variable end
 
 
 

@@ -54,7 +54,7 @@ export default function MovieHome(props){
     )
 }
 
-export async function getStaticProps(){
+export async function getServerSideProps(){
   const res0 = await fetch(`${process.env.HOST}/api/movie/read`)
   const res1 = await fetch(`${process.env.HOST}/api/movie/readType`)
   const movie = await res0.json()

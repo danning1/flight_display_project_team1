@@ -73,7 +73,7 @@ export default function Home(props){
   )
 }
 
-export async function getStaticProps(context){
+export async function getServerSideProps(context){
   const res = await fetch(`${process.env.HOST}/api/categories/read`)
   const categories = await res.json()
   return{

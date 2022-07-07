@@ -25,7 +25,7 @@ export default function ItemList({categories}){
                 <React.Fragment key={el.name}>
                     <Card sx={{flex:1/4,margin:"10px",height:'100px',width:'300px',backgroundColor:'#B4E1F9'}} onClick={e=>{router.push(`/${el.name.toLowerCase()}`)}}>
                         <CardActionArea sx={{width:'100%',height:'100%',display:'flex',flexDirection:'column'}}>
-                            <Avatar sx={{bgcolor: stringToColor(el.name),height:'70px',width:'70px'}} children={`${el.name}`} ></Avatar>
+                            <Avatar sx={{bgcolor: stringToColor(el.name),height:'70px',width:'70px'}}>{el.name}</Avatar>
                             {/* <Typography align='center' alignself='center' variant="h6" sx={{height:'60px',width:'100%',flex:1/5}}>{el.name}</Typography>
                             <Box sx={{width:'100%',flex:4/5,backgroundColor:'rgb(231, 238, 244)'}}></Box> */}
                         </CardActionArea>

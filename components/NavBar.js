@@ -151,7 +151,7 @@ export default function NavBar({user, isLogin}){
       >
         <Box sx={style}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            Tell us What's your Emergency
+            Tell us What is your Emergency
           </Typography>
 
           <input type="text" name="text" className={styles.input} placeholder="Type here!"></input>
