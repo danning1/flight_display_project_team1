@@ -99,9 +99,9 @@ export default function GameHome(props){
                         </h1>
                         
                         <p className={styles.gameDesc}>
-                        Bananagrams is based on arranging one's tiles 
+                        Bananagrams is based on arranging one is tiles 
                         into a grid of connected words faster than 
-                        one's opponents. The object of the game is to 
+                        one is opponents. The object of the game is to 
                         be the first to complete a word grid after the 
                         pool of tiles has been exhausted. The tiles 
                         come in a fabric banana-shaped package.
@@ -130,11 +130,11 @@ export default function GameHome(props){
                         <p className={styles.gameDesc}>
                         Battleship is a strategy type guessing game 
                         for two players. It is played on ruled grids 
-                        on which each player's fleet of warships are marked. 
+                        on which each player is fleet of warships are marked. 
                         The locations of the fleets are concealed from the 
-                        other player. Players alternate turns calling "shots" 
-                        at the other player's ships, and the objective of the 
-                        game is to destroy the opposing player's fleet.
+                        other player. Players alternate turns calling &quot;shots&quot; 
+                        at the other player is ships, and the objective of the 
+                        game is to destroy the opposing player is fleet.
                         </p>
                         
                     </section>
@@ -186,8 +186,8 @@ export default function GameHome(props){
                         The player slides numbered tiles on a four-by-four 
                         grid to combine addends and multiples of three.
                         For example, ones and twos merge to become a single 
-                        "three" tile, two threes merge into "six", and two 
-                        sixes merge into "12". Swiping the screen up, down, 
+                        &quot;three&quot; tile, two threes merge into &quot;six&quot;, and two 
+                        sixes merge into &quot;12&quot;. Swiping the screen up, down, 
                         left, or right moves all of the tiles one square 
                         (if possible) on the grid in that direction and adds 
                         a new tile to the grid in the same direction. 
