@@ -94,7 +94,7 @@ export default function CartHome(props){
           }
         }
       }else if (f==1){
-        if (!user.id){
+        if (!isLogin){
           alert("plz log in first");
         }else{
           const ct = await fetch(`api/shoppingHistory/create`,{
