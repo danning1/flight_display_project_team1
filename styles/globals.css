@@ -6,3 +6,12 @@ html, body, #__next{
 body{
     margin: 0;
 }
+div{
+    background-color: #FBFEF9;
+}
+p{
+    color: #191923;
+}
+.MuiBox-root{
+    background-color: #FBFEF9;
+}

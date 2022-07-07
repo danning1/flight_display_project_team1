@@ -12,10 +12,11 @@ export default function CartHome(props){
     const [shoppingCart,setShoppingCart] = useState(null);
     const [onload,setOnload] = useState(false);
     const [totalPrice,setTotalPrice] = useState(0); 
+    
+
+    // nav bar variabel
     const [user,setUser] = useState(null);
     const [isLogin,setIsLogin] = useState(false);
-
-    // user init
     useEffect(()=>{
       let data = localStorage.getItem('userDB');
 
@@ -81,14 +82,27 @@ export default function CartHome(props){
           data = JSON.parse(data)
           const res = await fetch(`api/user/${data.id}/${totalPrice}`)
           if(res.status==200){
-            localStorage.removeItem('shoppingCartDB');
+            
+            const res_hist = await fetch(`api/shoppingHistory/create`,{
+              method : "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({data:shoppingCart,userId:user.id})
+            })
+            .then(localStorage.removeItem('shoppingCartDB'))
+            .then(router.reload(window.location.pathname))
+            
           }else{
             alert(res.statusText)
           }
         }
       }else if (f==1){
-        localStorage.removeItem('shoppingCartDB');
-        router.push(`/creditCard`)
+        const ct = await fetch(`api/shoppingHistory/create`,{
+          method : "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({data:shoppingCart,userId:user.id})
+        })
+        .then(localStorage.removeItem('shoppingCartDB'))
+        // router.push(`/creditCard`)
       }
     }
 
@@ -147,8 +161,8 @@ export default function CartHome(props){
                     </TableBody>
                 </Table>
             </TableContainer>
-              <Button onClick={e=>{paymentHandeler(1)}} variant='contained' sx={{backgroundColor:'green',flex:1/2,margin:'2px',height:'50px'}}>Pay with Credit Card ({totalPrice}$)</Button>
-              <Button onClick={e=>{paymentHandeler(0)}} variant='contained' sx={{backgroundColor:'green',flex:1/2,margin:'2px',height:'50px'}}>Pay with Point ({totalPrice}$)</Button>
+              <Button onClick={e=>{paymentHandeler(1)}} variant='contained' sx={{backgroundColor:'green',flex:1/2,margin:'2px',height:'50px'}}>Pay with Credit Card ({totalPrice.toFixed(2)}$)</Button>
+              <Button onClick={e=>{paymentHandeler(0)}} variant='contained' sx={{backgroundColor:'green',flex:1/2,margin:'2px',height:'50px'}}>Pay with Point ({totalPrice.toFixed(2)}$)</Button>
           </Box>
         </Box>
     </React.Fragment>

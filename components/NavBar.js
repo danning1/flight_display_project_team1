@@ -1,14 +1,23 @@
-import { Button, Dialog, DialogTitle, IconButton, TextField, Typography, Box } from "@mui/material";
+import { Button, Dialog, DialogTitle, IconButton, TextField, Typography, Box, Badge } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import MenuIcon from '@mui/icons-material/Menu';
 import { Label } from "@mui/icons-material";
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 export default function NavBar({user, isLogin}){
     const router = useRouter();
     const [open,setOpen] = useState(false);
-    const [count,setCount] = useState(0);
-    
+    const [badge,setBadge] = useState(0);    
+
+    useEffect(()=>{
+        let data = localStorage.getItem('shoppingCartDB');
+        if(!data) 
+        data = {}
+        else
+        data = JSON.parse(data)
+        setBadge(Object.keys(data).length)
+    },[])
 
     function loginHandeler(){
         setOpen(true);
@@ -25,8 +34,11 @@ export default function NavBar({user, isLogin}){
                 const data = await res.json();
                 const jObj = JSON.stringify(data)
                 localStorage.setItem('userDB',jObj)
+                router.reload(window.location.pathname)
+            }else{
+                alert('invalid username/password');
             }
-            setOpen(0)
+            setOpen(false)
         }
 
         return(
@@ -46,21 +58,29 @@ export default function NavBar({user, isLogin}){
     
     return(
         <Box sx={{
-            backgroundColor:"gray",
+            borderStyle:'solid',
             display:'flex',
-            flexWrap:'wrap',
+            flexWrap:'nowrap',
+            borderBottom:1,
+            borderTop:0,
+            borderLeft:0,
+            borderRight:0,
           }}>
             {(!isLogin)
             ?
             <Button variant="contained" onClick={e=>{loginHandeler()}} startIcon={<MenuIcon />}>Log in</Button>
             :
-            <Typography  sx={{padding:'8px',align:'center',alignSelf:'center'}}>Wellcome {user.name}({parseFloat(user.balance).toFixed(2)}$)</Typography>
+            <Button variant="contained" onClick={e=>{confirm(`balance: ${parseFloat(user.balance).toFixed(2)}$`)}} startIcon={<MenuIcon />} sx={{flexDirection:'column'}} >{user.name}</Button>
             }
-            <Button variant="contained" onClick={e=>{router.push(`shoppingcart`)}} startIcon={<MenuIcon />}>Cart</Button>
+            <IconButton onClick={e=>{router.push(`shoppingcart`)}}>
+                <Badge badgeContent={badge} color ='secondary'>
+                    <ShoppingCartIcon />
+                </Badge>
+            </IconButton>
             <SimpleDialog open={open} setOpen={setOpen}></SimpleDialog>
-            <Button variant="outlined" onClick={e=>{router.push(`/`)}} alignself={'center'} align={'center'} sx={{flex:1,fontSize:'24px',color:'white'}}><b>AirLine</b></Button>
-            <Button variant="contained" onClick={e=>{router.push(`assistant`)}} startIcon={<MenuIcon />}>Assistant</Button>
-            <Button variant="contained" onClick={e=>{router.push(`emergency`)}} color='error' startIcon={<MenuIcon />}>Emergency</Button>
+            <Button variant='text' onClick={e=>{router.push(`/`)}} alignself={'center'} align={'center'} sx={{flex:1,fontSize:'24px',minWidth:'110px'}}><b>AirLine</b></Button>
+            <Button variant="contained" onClick={e=>{router.push(`assistant`)}} startIcon={<MenuIcon />} sx={{flexDirection:'column'}}>Assistant</Button>
+            <Button variant="contained" onClick={e=>{router.push(`emergency`)}} color='error' startIcon={<MenuIcon />} sx={{flexDirection:'column'}}>Emergency</Button>
         </Box>
     )
 }

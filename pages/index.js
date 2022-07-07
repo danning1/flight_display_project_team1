@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import CategoryList from "../components/CategoryList";
 import NavBar from "../components/NavBar";
@@ -10,10 +10,9 @@ export default function Home(props){
   useEffect(()=>{
     let data = localStorage.getItem('userDB');
 
-    if(!data) {
+    if(!data||data=='null') {
         setIsLogin(false)
-    }
-    else{
+    }else{
       data = JSON.parse(data);
       fetch(`/api/user/${data.id}`)
       .then(res=>res.json())
@@ -39,14 +38,31 @@ export default function Home(props){
           {/*head*/}
           <Box sx={{
             flex:0.4,
-            backgroundColor:"red",
+            backgroundImage:`url(/flight001.jpg)`,
+            backgroundRepeat:'no-repeat',
+            backgroundSize:'100% 100%',
+            display:"inline-flex",
           }}>
-            <img src="/flight001.jpg"></img>
+            <Box sx={{
+              margin:'10%',
+              flex:1,
+              backgroundColor:'white',
+            }}>
+              <Typography align='center' variant='h2'>Welcome to xxx AirLine</Typography>
+              <Typography align='center' variant='h4'>Flight Model: 737 Max</Typography>
+              <Typography align='center' variant='h4'>From: somewhere</Typography>
+              <Typography align='center' variant='h4'>To: nowhere</Typography>
+              <Typography align='center' variant='h4'>Estimate Time: 7/8/2023 6:00 AM EST</Typography>
+            </Box>
           </Box>
           {/*Body*/}
           <Box sx={{
             flex:0.6,
-            backgroundColor:"blue",
+            borderTop:1,
+            borderLeft:0,
+            borderRight:0,
+            borderBottom:0,
+            borderStyle:'solid',
             display:"flex",
             flexDirection:"row",
           }}>
