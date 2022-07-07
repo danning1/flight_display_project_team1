@@ -18,7 +18,6 @@ export default async function handler(req, res) {
             res.status('406')
         }else{
             val = user.balance - val;
-            console.log(slug,val)
             const update = await prisma.user.update({
             where:{
                 id: parseInt(slug[0]),

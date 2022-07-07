@@ -81,7 +81,6 @@ export default function CartHome(props){
           data = JSON.parse(data)
           const res = await fetch(`api/user/${data.id}/${totalPrice}`)
           if(res.status==200){
-            
             const res_hist = await fetch(`api/shoppingHistory/create`,{
               method : "POST",
               headers: { "Content-Type": "application/json" },

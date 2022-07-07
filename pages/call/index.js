@@ -58,6 +58,7 @@ export default function BasicModal() {
             setUser(d);
             localStorage.setItem('userDB',JSON.stringify(d))
             setIsLogin(true);
+            setLoyaltyCoin(d.balance);
         })
         }
     },[]);
@@ -81,14 +82,14 @@ export default function BasicModal() {
             console.log("ended")
         }
     }
-    useEffect(() => {
-        let loyaltyData = localStorage.getItem('loyaltyData')
-        if (loyaltyData) {
-            console.log("loyaltyData", loyaltyData)
-            loyaltyData = parseInt(JSON.parse(loyaltyData))
-            setLoyaltyCoin(loyaltyData)
-        }
-    }, [loyaltyCoin])
+    // useEffect(() => {
+    //     let loyaltyData = localStorage.getItem('loyaltyData')
+    //     if (loyaltyData) {
+    //         console.log("loyaltyData", loyaltyData)
+    //         loyaltyData = parseInt(JSON.parse(loyaltyData))
+    //         setLoyaltyCoin(loyaltyData)
+    //     }
+    // }, [loyaltyCoin])
 
 
     useEffect(() => {
@@ -128,7 +129,7 @@ export default function BasicModal() {
                     your current balance is:{ballance}
                 </p>
                 <p className={styles.balance}>
-                    your current Loyalty Points :{loyaltyCoin}
+                    your current Loyalty Points :{loyaltyCoin.toFixed(2)}
                 </p>
                 <div className={styles.inputGroup}>
                     <input type="number" className={styles.numberInput} placeholder="+920000000000" />
@@ -150,7 +151,7 @@ export default function BasicModal() {
                     </button>
                     <div>
                         <button className={styles.buttonCallLoyalty} onClick={
-                            () => {
+                            async () => {
                                 if (loyaltyCoin >= 10) {
                                     let loyaltyCoinData = loyaltyCoin - 10
                                     setLoyaltyCoin(loyaltyCoinData)
@@ -159,7 +160,7 @@ export default function BasicModal() {
                                     audioApp.onended = () => {
                                         setCallOpen(true)
                                     }
-
+                                    const res = await fetch(`api/user/${user.id}/${10}`)
                                 }
                                 else {
                                     alert("you don't have enough money")
