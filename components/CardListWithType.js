@@ -31,7 +31,6 @@ export default function CardListWithType({data,data_type,currentTab}){
                 data[item.name] = {name:item.name,price:item.price,count:1}
             }
             const jsonObject = JSON.stringify(data)
-            console.log(data)
             localStorage.setItem('shoppingCartDB',jsonObject)
 
 

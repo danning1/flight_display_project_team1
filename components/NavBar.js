@@ -1,14 +1,26 @@
-import { Button, Dialog, DialogTitle, IconButton, TextField, Typography, Box, Badge, InputLabel } from "@mui/material";
+import { Button, Dialog, DialogTitle, IconButton, TextField, Modal, Box, Badge, InputLabel,Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import MenuIcon from '@mui/icons-material/Menu';
-import { Label } from "@mui/icons-material";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import HomeIcon from '@mui/icons-material/Home'
+import styles from '../styles/Osman.button.module.css'
+
+const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+  };
 
 export default function NavBar({user, isLogin}){
     const router = useRouter();
-    const [open,setOpen] = useState(false);
+    const [loginSwitch,setLoginSwitch] = useState(false);
     const [badge,setBadge] = useState(0);    
 
     useEffect(()=>{
@@ -22,15 +34,44 @@ export default function NavBar({user, isLogin}){
 
     useEffect(
         ()=>{
-            window.addEventListener('click',e=>{
-
+            document.addEventListener('storage',()=>{
+                console.log('storage event')
+                setBadge(0);
             })
-            window.removeEventListener('click')
-        }
+        
+            return ()=>{
+                document.removeEventListener('storage',()=>{});
+            }
+        },[]
     )
 
+    //Osman start
+    const [open, setOpen] = useState(false);
+    const [openFlight, setOpenFlight] = useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
+    const handleCloseFlight = () => setOpenFlight(false);
+    const [audio, setAudio] = useState(null)
+    const [audioFlight, setAudioFlight] = useState(null)
+    useEffect(() => {
+        const audioVar = new Audio('/emergencyCall.mp3')
+        const audioFlightVar = new Audio('/phoneCall.mp3')
+        setAudio(audioVar)
+        setAudioFlight(audioFlightVar)
+        let loyaltyData = localStorage.getItem('loyaltyData')
+        if (loyaltyData) {
+        console.log("loyaltyData", loyaltyData)
+        loyaltyData = JSON.parse(loyaltyData)
+        }
+        else {
+        loyaltyData = 100
+        localStorage.setItem('loyaltyData', JSON.stringify(loyaltyData))
+        }
+    }, [])
+  //Osman end
+
     function loginHandeler(){
-        setOpen(true);
+        setLoginSwitch(true);
     }
 
     function SimpleDialog(props){
@@ -88,10 +129,51 @@ export default function NavBar({user, isLogin}){
                     <ShoppingCartIcon />
                 </Badge>
             </IconButton>
-            <SimpleDialog open={open} setOpen={setOpen}></SimpleDialog>
+            <SimpleDialog open={loginSwitch} setOpen={setLoginSwitch}></SimpleDialog>
             <Button variant='text' onClick={e=>{router.push(`/`)}} alignself={'center'} align={'center'} sx={{flex:1,fontSize:'24px',minWidth:'110px'}}><HomeIcon/><b>AirLine</b></Button>
-            <Button variant="contained" onClick={e=>{router.push(`assistant`)}} startIcon={<MenuIcon />} sx={{flexDirection:'column'}}>Assistant</Button>
-            <Button variant="contained" onClick={e=>{router.push(`emergency`)}} color='error' startIcon={<MenuIcon />} sx={{flexDirection:'column'}}>Emergency</Button>
+            <Button variant="contained" onClick={() => {
+            audioFlight.play();
+            audioFlight.onended = () => {
+                setOpenFlight(true)
+            }
+            }} startIcon={<MenuIcon />} sx={{flexDirection:'column'}}>Assistant</Button>
+            <Button variant="contained" onClick={() => {
+            audio.play();
+            audio.onended = () => {
+                setOpen(true)
+            }
+            }} color='error' startIcon={<MenuIcon />} sx={{flexDirection:'column'}}>Emergency</Button>
+            <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            Tell us What's your Emergency
+          </Typography>
+
+          <input type="text" name="text" className={styles.input} placeholder="Type here!"></input>
+          <Button className={styles.submitButton} onClick={handleClose}>Submit</Button>
+        </Box>
+      </Modal>
+      <Modal
+        open={openFlight}
+        onClose={handleCloseFlight}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            Thanks for Calling
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            Tell us how can we assist you?
+          </Typography>
+          <Button onClick={handleCloseFlight}>Close</Button>
+        </Box>
+      </Modal>
         </Box>
     )
 }
