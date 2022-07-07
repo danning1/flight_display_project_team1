@@ -134,7 +134,7 @@ export default function CartHome(props){
             flexDirection:'row',
             flexWrap:'wrap'
           }}>
-            <TableContainer component='Paper' sx={{flex:'auto'}}>
+            <TableContainer sx={{flex:'auto'}}>
                 <Table sx={{minWidth:650}}>
                     <TableHead>
                         <TableRow>

@@ -20,6 +20,7 @@ ORM:            Prisma
 # packages
 ```
 UI: MUI MIT-licensed
+Pic taking: html2canvas
 ```
 # icons
 https://mui.com/material-ui/material-icons/
