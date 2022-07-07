@@ -48,7 +48,7 @@ export default function GameHome(props){
           <NavBar user={user} isLogin={isLogin}></NavBar>
 
           {/*Body*/}
-          
+          <Box sx={{display:'flex',flexDirection:'column'}}>
           <section className ={styles.frames}>
                 <section className={styles.container}>
                     <div className={styles.imgContainer}>
@@ -144,8 +144,7 @@ export default function GameHome(props){
             <section className={styles.frames}>
                 <section className={styles.container}>
                     <section className={styles.ImageContainer}>
-                      <Image src={millionare} alt="millionare" width={200}
-        height={150} />
+                      <Image src={millionare} alt="millionare" width={200} height={150} />
                     </section>
                     <section className={styles.firstHalf}>
 
@@ -202,7 +201,7 @@ export default function GameHome(props){
                     </section>
                 </section>
             </section>
-            
+          </Box>
 
         </Box>
     </React.Fragment>
