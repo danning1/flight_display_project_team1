@@ -24,3 +24,11 @@ Pic taking: html2canvas
 ```
 # icons
 https://mui.com/material-ui/material-icons/
+
+# custom port
+```
+To use other host and ports
+ex:
+npx next dev/start -H 192.168.1.100 -p 3001
+also need to change HOSTNAME and PORT in .env.local file
+```
