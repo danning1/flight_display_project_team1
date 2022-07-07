@@ -1,9 +1,10 @@
-import { Button, Dialog, DialogTitle, IconButton, TextField, Typography, Box, Badge } from "@mui/material";
+import { Button, Dialog, DialogTitle, IconButton, TextField, Typography, Box, Badge, InputLabel } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import MenuIcon from '@mui/icons-material/Menu';
 import { Label } from "@mui/icons-material";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import HomeIcon from '@mui/icons-material/Home'
 
 export default function NavBar({user, isLogin}){
     const router = useRouter();
@@ -17,7 +18,16 @@ export default function NavBar({user, isLogin}){
         else
         data = JSON.parse(data)
         setBadge(Object.keys(data).length)
-    },[])
+    },[badge])
+
+    useEffect(
+        ()=>{
+            window.addEventListener('click',e=>{
+
+            })
+            window.removeEventListener('click')
+        }
+    )
 
     function loginHandeler(){
         setOpen(true);
@@ -45,9 +55,9 @@ export default function NavBar({user, isLogin}){
             <Dialog open={props.open}>
                 <DialogTitle>Log in</DialogTitle>
                 <Box>
-                    <Label>username:</Label>
+                    <InputLabel>username:</InputLabel>
                     <TextField id='username' value={userName} onChange={e=>{setUserName(e.currentTarget.value)}}></TextField>
-                    <Label>password:</Label>
+                    <InputLabel>password:</InputLabel>
                     <TextField id='password' value={password} onChange={e=>{setPassword(e.currentTarget.value)}}></TextField>
                     <Button onClick={e=>{handeler()}}>Log in</Button>
                 </Box>
@@ -79,7 +89,7 @@ export default function NavBar({user, isLogin}){
                 </Badge>
             </IconButton>
             <SimpleDialog open={open} setOpen={setOpen}></SimpleDialog>
-            <Button variant='text' onClick={e=>{router.push(`/`)}} alignself={'center'} align={'center'} sx={{flex:1,fontSize:'24px',minWidth:'110px'}}><b>AirLine</b></Button>
+            <Button variant='text' onClick={e=>{router.push(`/`)}} alignself={'center'} align={'center'} sx={{flex:1,fontSize:'24px',minWidth:'110px'}}><HomeIcon/><b>AirLine</b></Button>
             <Button variant="contained" onClick={e=>{router.push(`assistant`)}} startIcon={<MenuIcon />} sx={{flexDirection:'column'}}>Assistant</Button>
             <Button variant="contained" onClick={e=>{router.push(`emergency`)}} color='error' startIcon={<MenuIcon />} sx={{flexDirection:'column'}}>Emergency</Button>
         </Box>
