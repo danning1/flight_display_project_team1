@@ -12,6 +12,11 @@ Run Build version: npm run start
 ```
 Dev Mode: npm run dev
 ```
+# userInfo
+```
+    username: team1
+    password: team1
+```
 # Frameworks
 ```
 Web Framework:  Next.js
