@@ -45,24 +45,6 @@ export default function ShoppingHistory(){
         }
 
         const exportAsPicture = () => {
-            // var html = document.getElementsByTagName('HTML')[0]
-            // var body =  document.getElementsByTagName('BODY')[0]
-            // var htmlWidth = html.clientWidth;
-            // var bodyWidth = body.clientWidth;
-            // var data = document.getElementById('exportContainer')
-            // var newWidth = data.scrollWidth - data.clientWidth
-            // if (newWidth > data.clientWidth){
-            //   htmlWidth += newWidth
-            //   bodyWidth += newWidth
-            // }
-            // html.style.width = htmlWidth + 'px'
-            // body.style.width = bodyWidth + 'px'
-            // html2canvas(data).then((canvas)=>{
-            //   var image = canvas.toDataURL("image/jpeg", 1.0);
-            //   console.log(image)
-            //   var fileName = 'text.jpg'
-            //     saveAs(image, fileName)
-            // })
             html2canvas(document.getElementById("html2canvasbd")).then((canvas) => {
                 var image = canvas.toDataURL("image/jpeg", 1.0);
                 var fileName = 'text.jpg'
