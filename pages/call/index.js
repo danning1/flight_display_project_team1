@@ -116,7 +116,7 @@ export default function BasicModal() {
                 <h1 className={styles.heading}>Make phone call</h1>
 
                 <Button
-                    onClick={handleOpen}
+                    onClick={handleOpenApp}
                     className={styles.cardButton}
                 >
                     add card
